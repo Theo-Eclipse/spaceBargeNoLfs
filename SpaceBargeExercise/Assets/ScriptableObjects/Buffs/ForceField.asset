@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee27a498996eb14ba1973b9f44e0d97, type: 3}
+  m_Name: ForceField
+  m_EditorClassIdentifier: 
+  buffInfo:
+    buffName: Force Field
+    description: This force field grants you 15 seconds of immortality!
+    buffIcon: {fileID: 21300000, guid: 0f58d1aa159825e4fa07bce8dd4d9005, type: 3}
+  buffEffect:
+    duration: 15
+    stackEffect: 1
+    forceFieldPrefab: {fileID: 7655282251616271659, guid: 2af26bfaf2ee4ef489687ed461917c57,
+      type: 3}
