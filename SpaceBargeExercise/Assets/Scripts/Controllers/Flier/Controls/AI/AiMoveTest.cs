@@ -7,7 +7,7 @@ namespace Flier.Controls.AI
     public class AiMoveTest : MonoBehaviour
     {
         [SerializeField] private Camera eventCamera;
-        [SerializeField] private BasicAiFlier ai;
+        [SerializeField] private CruiseControl ai;
         public Vector3 cursorWorldPos = Vector3.zero;
         public Ray worldPoint;
         public float rayDistance = 10;

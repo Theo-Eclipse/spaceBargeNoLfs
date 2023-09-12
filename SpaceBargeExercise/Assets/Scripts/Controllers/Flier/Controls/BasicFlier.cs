@@ -60,7 +60,7 @@ namespace Flier
         public bool isAlive => sFinnal.health > 0;
         protected float AngleOfDirection => Vector2.SignedAngle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(headingDirection.x, headingDirection.z));
         protected float AngleOfVelocity => Vector2.SignedAngle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(flierBody.velocity.x, flierBody.velocity.z).normalized);
-        protected float AngleToAxisInput => Vector2.SignedAngle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(thrustInputDirection.x, thrustInputDirection.z));
+        public float AngleToAxisInput => Vector2.SignedAngle(new Vector2(transform.forward.x, transform.forward.z), new Vector2(thrustInputDirection.x, thrustInputDirection.z));
         private float TorqueToDirection => (Mathf.InverseLerp(90, -90, AngleOfDirection) - 0.5f) * 2.0f;
         private bool HasThrustInput => thrustPower > 0.01f && thrustInputDirection.magnitude > 0.01f;
         private bool LookAtDirection => lockAtTarget || turnInputDirection.magnitude > 0.1 || HasThrustInput;

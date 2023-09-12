@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Flier.Controls
 {
-    public class FlierSpawnPoint : MonoBehaviour, ILevelControl
+    public class FlierAiSpawner : MonoBehaviour, ILevelControl
     {
         public bool showGizmos = false;
         [Space, Space]
@@ -55,6 +55,9 @@ namespace Flier.Controls
             Gizmos.DrawWireSphere(transform.position, 1.5f);
         }
 
+        private void OnAiDeath() 
+        {
 
+        }
     }
 }

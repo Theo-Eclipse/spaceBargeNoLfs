@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Flier;
 using Flier.Controls.AI;
 using UnityEngine.EventSystems;
 
@@ -35,17 +36,13 @@ namespace Flier.Controls
             playerFlier.onFlierDestroyed.AddListener(ForgetTarget);
             nextAutocheckTime = Time.time + auoCheckInterval;
         }
-
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
                 CheckSphereForTargets(InputToWorldPosition(), castRadius);
             if (!playerFlier.lockAtTarget && autoLockTarget)
                 UpdateAutocheckTimer();
-
-
         }
-
         private void UpdateAutocheckTimer() 
         {
             if (nextAutocheckTime > 0 && Time.time >= nextAutocheckTime) 
@@ -70,16 +67,19 @@ namespace Flier.Controls
                 return;
             collidersClicked = Physics.OverlapSphere(position, checkRadius, castLayer);
             foreach (var collider in collidersClicked)
-                if (collider.GetComponentInParent<BasicAiFlier>())
+            {
+                var flier = collider.GetComponentInParent<BasicFlier>();
+                if (flier != null)
                 {
-                    LockTarget(collider.GetComponentInParent<BasicAiFlier>());
+                    LockTarget(flier);
                     return;
                 }
+            }
             if (playerFlier.lockAtTarget)
                 ForgetTarget();
         }
 
-        private void LockTarget(BasicAiFlier aiFlier) 
+        private void LockTarget(BasicFlier aiFlier) 
         {
             if (playerFlier.lockAtTarget)
                 ForgetTarget();
@@ -91,7 +91,7 @@ namespace Flier.Controls
         {
             if (!playerFlier.lockAtTarget)
                 return;
-            playerFlier.lockAtTarget.GetComponent<BasicAiFlier>().onFlierDestroyed.RemoveListener(ForgetTarget);
+            playerFlier.lockAtTarget.GetComponent<BasicFlier>().onFlierDestroyed.RemoveListener(ForgetTarget);
             playerFlier.lockAtTarget = null;
             nextAutocheckTime = Time.time + auoCheckInterval;
         }

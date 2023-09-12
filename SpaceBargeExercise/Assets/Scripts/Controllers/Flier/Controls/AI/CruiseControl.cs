@@ -4,17 +4,18 @@ using UnityEngine;
 
 namespace Flier.Controls.AI
 {
-    public class BasicAiFlier : BasicFlier
+    [RequireComponent(typeof(BasicFlier))]
+    public class CruiseControl : MonoBehaviour
     {
         public bool showGizmos = false;
         [Space, Space]
-        [Space, Header("AI Waypoint")]
-        public Vector3 destinationPoint = Vector3.zero;
-        public Vector3 wayPoint = Vector3.zero;
-        public float maxThrustDistance = 12.5f;
-        public float reachPointDistance = 0.5f;
-        public float minimumThrust = 0.2f;
-        public bool move = false;
+        [Space, Header("Cruise Settings")]
+        public Vector3 destinationPoint = Vector3.zero; // the finnal point to be reached.
+        public Vector3 wayPoint = Vector3.zero;// Temporary move point, used to avoid obstacles, until gets to the destinationPoint.
+        public float maxThrustDistance = 12.5f;// Disance at which the engine works at it's maximum thrust.
+        public float reachPointDistance = 0.5f;// At which distance, the waypoint counts as reached.
+        public float minimumThrust = 0.2f;// What's the minimum thrust, when a wayPoint is very close.
+        public bool move = false;// used to start, and stop the process of reaching the final destination.
 
         [Space, Header("Obstacle Avoidance")]
         [Range(4, 24)] public int raysCount = 6;
@@ -30,32 +31,42 @@ namespace Flier.Controls.AI
         private Ray sphereCastRay;
         private Vector3 bestResult;
 
+        private BasicFlier flier
+        {
+            get 
+            {
+                if (!m_flier)
+                    m_flier = GetComponent<BasicFlier>();
+                return m_flier;
+            }
+        }
+        private BasicFlier m_flier;
+
         private Vector2 InputAxis => new Vector2(wayPoint.x - transform.position.x, wayPoint.z - transform.position.z);
         private Vector3 LastCastPosition => transform.position + sphereCastRay.direction.normalized * castDistance;
         private bool DestinationIsObscured() => Physics.CheckSphere(destinationPoint, castRadius, obstacleLayerMask);
         private float TargetThrust()
         {
-            if (lockAtTarget)
+            if (flier.lockAtTarget)
                 return Mathf.Clamp(InputAxis.magnitude / maxThrustDistance, minimumThrust, 1.0f);
-            else if (Mathf.Abs(AngleToAxisInput) < 5.0f)
+            else if (Mathf.Abs(flier.AngleToAxisInput) < 5.0f)
                 return Mathf.Clamp(InputAxis.magnitude / maxThrustDistance, minimumThrust, 1.0f);
             else return minimumThrust;
         }
         private float intervalHit = 0;
 
         // Update is called once per frame
-        protected override void Update()
+        protected virtual void Update()
         {
             if (InputAxis.magnitude > 0.1f)
             {
-                HandleMoveInput(InputAxis);
-                thrustPower = move ? TargetThrust() : 0.0f;
+                flier.HandleMoveInput(InputAxis);
+                flier.thrustPower = move ? TargetThrust() : 0.0f;
             }
             if (Vector3.Distance(wayPoint, destinationPoint) > 0.5f)
                 UpdateWayPointRealtime();
             if (move && Vector3.Distance(wayPoint, destinationPoint) < 0.5f && InputAxis.magnitude < reachPointDistance)
                 OnWayPointReached();
-            base.Update();
         }
 
         private void UpdateWayPointRealtime()
@@ -130,10 +141,6 @@ namespace Flier.Controls.AI
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(transform.position, wayPoint);
             Gizmos.DrawWireSphere(wayPoint, reachPointDistance);
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(transform.position, transform.position + flierBody.velocity);
-            Gizmos.color = Color.white;
-            Gizmos.DrawLine(transform.position, transform.position + (flierBody.velocity) * thrustPower);
             DrawSphereCastGizmo();
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Flier.Controls.AI
 {
-    public class AiPlayerFollower : BasicAiFlier
+    public class AiPlayerFollower : CruiseControl
     {
         [Space, Header("Follow Settings")]
         public bool enableFollowing = true;
