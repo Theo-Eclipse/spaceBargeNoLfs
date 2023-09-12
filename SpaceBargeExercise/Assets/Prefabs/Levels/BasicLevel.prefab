@@ -2504,6 +2504,11 @@ PrefabInstance:
       propertyPath: lockAtTarget
       value: 
       objectReference: {fileID: 1189495180601769891}
+    - target: {fileID: 241978526674947586, guid: 956ef88058c374f44a06801dcc358ba0,
+        type: 3}
+      propertyPath: destructionSound
+      value: explode
+      objectReference: {fileID: 0}
     - target: {fileID: 1450122842688450016, guid: 956ef88058c374f44a06801dcc358ba0,
         type: 3}
       propertyPath: followTarget
