@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Flier;
 
-public class PlayerStats : MonoBehaviour
+[RequireComponent(typeof(BasicFlier))]
+public class FuelSystem : MonoBehaviour
 {
-    public static PlayerStats instance { get; private set; }
-    public float playerScore = 0;
-    public int fuelCount = 26;
-    private void Awake()
-    {
-        instance = this;
-    }
+    [SerializeField] private BasicFlier flier;
     // Start is called before the first frame update
     void Start()
     {
