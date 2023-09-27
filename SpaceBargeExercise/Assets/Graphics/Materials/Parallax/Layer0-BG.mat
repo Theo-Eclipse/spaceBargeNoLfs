@@ -29,15 +29,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-<<<<<<< HEAD
         m_Texture: {fileID: 2800000, guid: ddcac1fac1f5c8943a30c2ef6b724062, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: -0.054379046, y: -0.083519414}
-=======
         m_Texture: {fileID: 2800000, guid: 35313af049b4a2f42a0325330c51d74a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: -0.044323422, y: -0.065261975}
->>>>>>> parent of 3dbd712... Fixed the red background, not it's purple and cyan!
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -59,15 +56,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-<<<<<<< HEAD
         m_Texture: {fileID: 2800000, guid: ddcac1fac1f5c8943a30c2ef6b724062, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: -0.054379046, y: -0.083519414}
-=======
-        m_Texture: {fileID: 2800000, guid: 35313af049b4a2f42a0325330c51d74a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: -0.044323422, y: -0.065261975}
->>>>>>> parent of 3dbd712... Fixed the red background, not it's purple and cyan!
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
